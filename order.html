@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="utf-8">
+    <title>سفارش آنلاین | فرشینه ERiSH</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="index.html" class="logo">فرشینه ERiSH 🌿</a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links">
+          <li><a href="index.html">خانه</a></li>
+          <li><a href="products.html">محصولات</a></li>
+          <li><a href="gallery.html">گالری</a></li>
+          <li><a href="order.html">سفارش آنلاین</a></li>
+          <li><a href="about.html">درباره ما</a></li>
+          <li><a href="contact.html">تماس با ما</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <header>
+      <h1>سفارش آنلاین فرشینه ERiSH 🌿</h1>
+      <p>فرم زیر را پر کنید تا سفارش شما ثبت شود 💬</p>
+    </header>
+
+    <main class="order-container">
+      <form id="orderForm" onsubmit="sendOrder(event)">
+        <label>نام و نام خانوادگی:</label>
+        <input type="text" id="order_name" required placeholder="نام خود را وارد کنید">
+
+        <label>شماره تماس:</label>
+        <input type="tel" id="order_phone" required placeholder="مثلاً 09123456789">
+
+        <label>انتخاب طرح فرشینه:</label>
+        <select id="product" required>
+          <option value="">-- انتخاب طرح --</option>
+          <option value="مدرن">فرشینه طرح مدرن</option>
+          <option value="گل رز">فرشینه طرح گل رز</option>
+          <option value="وینتج">فرشینه طرح وینتج</option>
+          <option value="کودکانه">فرشینه طرح کودکانه</option>
+        </select>
+
+        <label>سایز دلخواه:</label>
+        <input type="text" id="size" placeholder="مثلاً 2×1.5 متر">
+
+        <label>توضیحات یا آدرس دقیق:</label>
+        <textarea id="details" rows="4" placeholder="آدرس یا توضیحات اضافه..."></textarea>
+
+        <button type="submit">ارسال سفارش ✉️</button>
+      </form>
+
+      <p id="orderResult" style="text-align:center; color:#0b6b35; font-weight:bold; margin-top:20px;"></p>
+
+      <div class="methods">
+        <a href="https://wa.me/989229289822" target="_blank">سفارش از واتساپ 💬</a>
+        <a href="tel:09229289822">تماس مستقیم 📞</a>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2025 فرشینه ERiSH - همه حقوق محفوظ است 💚</p>
+      <a href="index.html">بازگشت به صفحه اصلی</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
