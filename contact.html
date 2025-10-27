@@ -26,7 +26,7 @@
 
     <header>
       <h1>تماس با فرشینه ERiSH 🌿</h1>
-      <p>با ما در تماس باشید — پاسخ‌گوی شما هستیم 💬</p>
+      <p>هر سؤال یا سفارشی دارید، با ما در ارتباط باشید 💬</p>
     </header>
 
     <main class="contact-container">
@@ -45,7 +45,7 @@
 
         <div class="info-box">
           <h3>📸 اینستاگرام</h3>
-          <a href="https://instagram.com/" target="_blank">@Erish-Carpet</a>
+          <a href="https://instagram.com/ErishCarpet" target="_blank">ErishCarpet@</a>
         </div>
 
         <div class="info-box">
@@ -55,8 +55,8 @@
       </div>
 
       <!-- فرم تماس -->
-      <h2 style="color:#0b6b35; text-align:center;">ارسال پیام مستقیم به تلگرام 💚</h2>
-      <form id="contactForm" onsubmit="sendMessage(event)">
+      <h2 style="color:#0b6b35; text-align:center;">ارسال پیام مستقیم در واتساپ 💚</h2>
+      <form id="contactForm" onsubmit="sendToWhatsApp(event)">
         <label>نام شما:</label>
         <input type="text" id="name" required placeholder="نام خود را وارد کنید">
 
@@ -66,14 +66,13 @@
         <label>پیام شما:</label>
         <textarea id="message" rows="4" required placeholder="پیام خود را بنویسید"></textarea>
 
-        <button type="submit">ارسال پیام ✉️</button>
+        <button type="submit">ارسال در واتساپ 💬</button>
       </form>
 
-      <p id="resultMessage" style="text-align:center; color:#0b6b35; font-weight:bold;"></p>
-
-      <!-- نقشه گوگل -->
+      <!-- نقشه -->
       <h2 style="color:#0b6b35; text-align:center; margin-top:40px;">📍 موقعیت فروشگاه روی نقشه</h2>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.644578260187!2d44.9850469!3d37.5520486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4017cbf6cbeb4c41:0x90c7db5dc3082d17!2sUrmia!5e0!3m2!1sen!2s!4v1694500000000" allowfullscreen="" loading="lazy"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.644578260187!2d44.9850469!3d37.5520486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4017cbf6cbeb4c41:0x90c7db5dc3082d17!2sUrmia!5e0!3m2!1sen!2s!4v1694500000000"
+        allowfullscreen="" loading="lazy"></iframe>
     </main>
 
     <footer>
@@ -81,6 +80,16 @@
       <a href="index.html">بازگشت به صفحه اصلی</a>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+      function sendToWhatsApp(event) {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const message = document.getElementById("message").value;
+        const text = `📩 پیام جدید از سایت فرشینه ERiSH:\n👤 نام: ${name}\n📞 شماره: ${phone}\n💬 پیام:\n${message}`;
+        const url = `https://wa.me/989229289822?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      }
+    </script>
   </body>
 </html>

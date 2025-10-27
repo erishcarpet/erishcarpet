@@ -370,4 +370,20 @@ footer {
   padding: 20px;
   margin-top: 40px;
   border-radius: 20px 20px 0 0;
+}/* دکمه بزرگ واتساپ در صفحه اصلی */
+.main-whatsapp-btn {
+  display: inline-block;
+  background-color: #25d366;
+  color: white;
+  padding: 14px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 35px;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.main-whatsapp-btn:hover {
+  background-color: #1ebd5a;
 }

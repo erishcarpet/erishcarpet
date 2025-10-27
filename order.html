@@ -5,7 +5,6 @@
     <title>سفارش آنلاین | فرشینه ERiSH</title>
     <link rel="stylesheet" href="styles.css">
   </head>
-
   <body>
 
     <!-- Navbar -->
@@ -26,11 +25,11 @@
 
     <header>
       <h1>سفارش آنلاین فرشینه ERiSH 🌿</h1>
-      <p>فرم زیر را پر کنید تا سفارش شما ثبت شود 💬</p>
+      <p>فرم زیر را پر کنید تا پیام سفارش شما در واتساپ باز شود 💬</p>
     </header>
 
     <main class="order-container">
-      <form id="orderForm" onsubmit="sendOrder(event)">
+      <form id="orderForm" onsubmit="sendToWhatsApp(event)">
         <label>نام و نام خانوادگی:</label>
         <input type="text" id="order_name" required placeholder="نام خود را وارد کنید">
 
@@ -52,15 +51,8 @@
         <label>توضیحات یا آدرس دقیق:</label>
         <textarea id="details" rows="4" placeholder="آدرس یا توضیحات اضافه..."></textarea>
 
-        <button type="submit">ارسال سفارش ✉️</button>
+        <button type="submit">ارسال سفارش در واتساپ 💬</button>
       </form>
-
-      <p id="orderResult" style="text-align:center; color:#0b6b35; font-weight:bold; margin-top:20px;"></p>
-
-      <div class="methods">
-        <a href="https://wa.me/989229289822" target="_blank">سفارش از واتساپ 💬</a>
-        <a href="tel:09229289822">تماس مستقیم 📞</a>
-      </div>
     </main>
 
     <footer>
@@ -68,6 +60,19 @@
       <a href="index.html">بازگشت به صفحه اصلی</a>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+      function sendToWhatsApp(event) {
+        event.preventDefault();
+        const name = document.getElementById("order_name").value;
+        const phone = document.getElementById("order_phone").value;
+        const product = document.getElementById("product").value;
+        const size = document.getElementById("size").value;
+        const details = document.getElementById("details").value;
+
+        const text = `🛍 سفارش جدید:\n👤 نام: ${name}\n📞 شماره: ${phone}\n🎨 طرح: ${product}\n📏 سایز: ${size}\n📍 توضیحات: ${details}`;
+        const url = `https://wa.me/989229289822?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+      }
+    </script>
   </body>
 </html>
