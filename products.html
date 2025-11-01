@@ -1,86 +1,54 @@
 <!DOCTYPE html>
 <html lang="fa">
-  <head>
-    <meta charset="utf-8">
-    <title>محصولات فرشینه ERiSH</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="index.html" class="logo">فرشینه ERiSH 🌿</a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <ul class="nav-links">
-          <li><a href="index.html">خانه</a></li>
-          <li><a href="products.html">محصولات</a></li>
-          <li><a href="gallery.html">گالری</a></li>
-          <li><a href="order.html">سفارش آنلاین</a></li>
-          <li><a href="about.html">درباره ما</a></li>
-          <li><a href="contact.html">تماس با ما</a></li>
-        </ul>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محصولات | ERiSH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">🧵 ERiSH Carpet</div>
+    <nav>
+      <a href="index.html">خانه</a>
+      <a href="products.html">محصولات</a>
+      <a href="offers.html">تخفیف‌ها</a>
+      <a href="stats.html">آمار</a>
+      <a href="dashboard.html">مدیریت</a>
+      <a href="contact.html">تماس</a>
     </nav>
+  </header>
 
-    <!-- Header -->
-    <header class="products-header">
-      <h1>محصولات فرشینه ERiSH 🌿</h1>
-      <p>کیفیت بالا، طرح‌های خاص و قیمت مناسب برای خانه‌های شیک 💚</p>
-    </header>
+  <section class="fade-in" style="text-align:center;">
+    <h2>🎨 دسته‌بندی محصولات</h2>
+    <p>با انتخاب هر دسته، محصولات آن را مشاهده و سفارش دهید.</p>
 
-    <!-- Products -->
-    <main>
-      <section class="products-container">
+    <div class="category-grid" style="margin-top:40px;">
+      <!-- فرشینه فانتزی -->
+      <div class="category-card">
+        <img src="fantasy1.jpg" alt="فرشینه فانتزی">
+        <h3>فرشینه‌های فانتزی</h3>
+        <button class="btn" onclick="location.href='fantasy.html'">مشاهده و سفارش</button>
+      </div>
 
-        <div class="product-card">
-          <img src="photo1.jpg" alt="فرشینه طرح مدرن">
-          <div class="product-info">
-            <h3>فرشینه طرح مدرن</h3>
-            <p>رویه مخمل شنل، نمد ۱۰۰۰ گرم، ضد لغزش</p>
-            <div class="price">قیمت: 600000 تومان</div>
-            <a class="whatsapp-btn" href="https://wa.me/989229289822?text=سلام می‌خواهم فرشینه طرح مدرن را سفارش بدهم" target="_blank">سفارش در واتساپ 💬</a>
-          </div>
-        </div>
+      <!-- فرشینه کلاسیک -->
+      <div class="category-card">
+        <img src="classic1.jpg" alt="فرشینه کلاسیک">
+        <h3>فرشینه‌های کلاسیک</h3>
+        <button class="btn" onclick="location.href='classic.html'">مشاهده و سفارش</button>
+      </div>
 
-        <div class="product-card">
-          <img src="photo2.jpg" alt="فرشینه طرح گل رز">
-          <div class="product-info">
-            <h3>فرشینه طرح گل رز</h3>
-            <p>لطافت خاص و مناسب دکور کلاسیک</p>
-            <div class="price">قیمت: ۹۲۰,۰۰۰ تومان</div>
-            <a class="whatsapp-btn" href="https://wa.me/989229289822?text=سلام می‌خواهم فرشینه طرح گل رز را سفارش بدهم" target="_blank">سفارش در واتساپ 💬</a>
-          </div>
-        </div>
+      <!-- فرشینه مدرن -->
+      <div class="category-card">
+        <img src="modern1.jpg" alt="فرشینه مدرن">
+        <h3>فرشینه‌های مدرن</h3>
+        <button class="btn" onclick="location.href='modern.html'">مشاهده و سفارش</button>
+      </div>
+    </div>
+  </section>
 
-        <div class="product-card">
-          <img src="photo3.jpg" alt="فرشینه طرح وینتج">
-          <div class="product-info">
-            <h3>فرشینه طرح وینتج</h3>
-            <p>سبک اروپایی، بسیار نرم و ضد لغزش</p>
-            <div class="price">قیمت: ۱,۰۵۰,۰۰۰ تومان</div>
-            <a class="whatsapp-btn" href="https://wa.me/989229289822?text=سلام می‌خواهم فرشینه طرح وینتج را سفارش بدهم" target="_blank">سفارش در واتساپ 💬</a>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <img src="photo4.jpg" alt="فرشینه طرح کودکانه">
-          <div class="product-info">
-            <h3>فرشینه طرح کودکانه</h3>
-            <p>نرم و رنگارنگ، مناسب اتاق کودک</p>
-            <div class="price">قیمت: ۷۸۰,۰۰۰ تومان</div>
-            <a class="whatsapp-btn" href="https://wa.me/989229289822?text=سلام می‌خواهم فرشینه طرح کودکانه را سفارش بدهم" target="_blank">سفارش در واتساپ 💬</a>
-          </div>
-        </div>
-
-      </section>
-    </main>
-
-    <footer>
-      <p>© 2025 فرشینه ERiSH - همه حقوق محفوظ است 💚</p>
-      <a href="index.html">بازگشت به صفحه اصلی</a>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+  <footer>
+    © 2025 ERiSH Carpet — تمامی حقوق محفوظ است 🌿
+  </footer>
+</body>
 </html>

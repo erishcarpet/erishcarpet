@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پنل مدیریتی | ERiSH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">🧵 پنل مدیریتی ERiSH Carpet</div>
+  </header>
+
+  <!-- 🔐 ورود دو مرحله‌ای -->
+  <div class="login" id="loginBox">
+    <h3>ورود مدیر</h3>
+
+    <div id="step1">
+      <input type="password" id="adminPass" placeholder="رمز عبور">
+      <button onclick="checkPassword()">ادامه ➡️</button>
+    </div>
+
+    <div id="step2" style="display:none;">
+      <p>کد تأیید دو مرحله‌ای شما:</p>
+      <h2 id="otpCode" style="color:#0b6b35; letter-spacing:5px;"></h2>
+      <input type="text" id="otpInput" placeholder="کد را وارد کنید">
+      <button onclick="verifyOTP()">ورود نهایی ✅</button>
+    </div>
+
+    <p style="color:gray;font-size:13px;margin-top:10px;">(رمز فعلی: erishadmin)</p>
+  </div>
+
+  <!-- 📊 داشبورد -->
+  <div class="dashboard" id="dashboardBox">
+    <h2>📊 آمار کلی سایت</h2>
+    <div class="stat-box">بازدید کل: <span id="totalViews">0</span></div>
+
+    <h2>🌟 محبوب‌ترین محصولات</h2>
+    <canvas id="viewChart" style="max-width:800px;margin:auto;"></canvas>
+
+    <h2>🧾 سفارش‌ها</h2>
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>نام مشتری</th>
+          <th>محصول</th>
+          <th>اندازه</th>
+          <th>شماره تماس</th>
+          <th>وضعیت</th>
+          <th>تغییر وضعیت</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div style="text-align:center; margin-top:20px;">
+      <button onclick="downloadOrders()" class="btn">📥 دانلود سفارش‌ها (Excel)</button>
+    </div>
+
+    <!-- 📨 بخش جدید پیام‌های تماس -->
+    <h2 style="margin-top:40px;">💬 پیام‌های تماس با ما</h2>
+    <table id="messagesTable">
+      <thead>
+        <tr>
+          <th>نام</th>
+          <th>شماره تماس</th>
+          <th>پیام</th>
+          <th>تاریخ</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div style="text-align:center; margin-top:20px;">
+      <button onclick="downloadMessages()" class="btn">📩 دانلود پیام‌ها (Excel)</button>
+    </div>
+
+    <a href="sales.html" class="btn" style="margin-top:25px;">📈 گزارش فروش ماهانه</a>
+  </div>
+
+  <!-- 🔔 اعلان سفارش جدید -->
+  <div id="popupNotif" style="
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    background:white;
+    box-shadow:0 4px 20px rgba(0,0,0,0.3);
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    z-index:9999;
+    width:90%;
+    max-width:400px;
+  ">
+    <h3 style="color:#0b6b35; margin-bottom:15px;">🔔 سفارش جدید ثبت شد!</h3>
+    <p id="popupText" style="font-weight:bold; color:#333;"></p>
+    <button onclick="closePopup()" class="btn">باشه ✅</button>
+  </div>
+
+  <footer>
+    © 2025 ERiSH Carpet — پنل مدیریت 🌿
+  </footer>
+
+  <script>
+    const correctPass = "erishadmin";
+    let generatedOTP = null;
+    const PRICE_PER_METER = 600000;
+
+    // مرحله ۱: رمز ورود
+    function checkPassword() {
+      const pass = document.getElementById("adminPass").value;
+      if (pass === correctPass) {
+        generatedOTP = Math.floor(1000 + Math.random() * 9000);
+        document.getElementById("otpCode").innerText = generatedOTP;
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+      } else {
+        alert("رمز اشتباه است ❌");
+      }
+    }
+
+    // مرحله ۲: بررسی کد
+    function verifyOTP() {
+      const input = document.getElementById("otpInput").value.trim();
+      if (input === generatedOTP.toString()) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboardBox").style.display = "block";
+        loadData();
+      } else {
+        alert("کد واردشده اشتباه است ❌");
+      }
+    }
+
+    // 📊 بارگذاری آمار وسفارش‌ها
+    function loadData() {
+      const total = localStorage.getItem("siteViews") || 0;
+      document.getElementById("totalViews").innerText = total;
+
+      const views = JSON.parse(localStorage.getItem("productViews") || "{}");
+      const ctx = document.getElementById('viewChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(views),
+          datasets: [{
+            label: 'بازدید',
+            data: Object.values(views),
+            backgroundColor: '#0b6b35aa',
+            borderColor: '#0b6b35',
+            borderWidth: 2,
+            borderRadius: 8
+          }]
+        },
+        options: { scales: { y: { beginAtZero: true } } }
+      });
+
+      loadOrders();
+      loadMessages();
+    }
+
+    // 🧾 سفارش‌ها
+    function loadOrders() {
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      const body = document.querySelector("#ordersTable tbody");
+      body.innerHTML = "";
+      orders.forEach((o, i) => {
+        body.innerHTML += `
+          <tr>
+            <td>${o.name}</td>
+            <td>${o.product}</td>
+            <td>${o.size} متر</td>
+            <td>${o.phone}</td>
+            <td>${o.status}</td>
+            <td>
+              <select onchange="updateStatus(${i}, this.value)">
+                <option ${o.status === "در حال بررسی" ? "selected" : ""}>در حال بررسی</option>
+                <option ${o.status === "در حال ارسال" ? "selected" : ""}>در حال ارسال</option>
+                <option ${o.status === "تکمیل شده" ? "selected" : ""}>تکمیل شده</option>
+              </select>
+            </td>
+          </tr>`;
+      });
+    }
+
+    function updateStatus(index, newStatus) {
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      orders[index].status = newStatus;
+      localStorage.setItem("orders", JSON.stringify(orders));
+      loadOrders();
+    }
+
+    // 💬 پیام‌های تماس
+    function loadMessages() {
+      const msgs = JSON.parse(localStorage.getItem("messages") || "[]");
+      const body = document.querySelector("#messagesTable tbody");
+      body.innerHTML = "";
+      msgs.forEach((m) => {
+        body.innerHTML += `
+          <tr>
+            <td>${m.name}</td>
+            <td>${m.phone}</td>
+            <td>${m.message}</td>
+            <td>${m.date}</td>
+          </tr>`;
+      });
+    }
+
+    // 📥 خروجی اکسل سفارش‌ها
+    function downloadOrders() {
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      if (orders.length === 0) return alert("هیچ سفارشی وجود ندارد 🌿");
+      const ws_data = orders.map(o => ({
+        "نام مشتری": o.name,
+        "شماره تماس": o.phone,
+        "محصول": o.product,
+        "اندازه": o.size,
+        "توضیحات": o.notes,
+        "وضعیت": o.status,
+        "تاریخ": o.date
+      }));
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb, ws, "Orders");
+      XLSX.writeFile(wb, "ERiSH_Orders.xlsx");
+    }
+
+    // 📩 خروجی اکسل پیام‌ها
+    function downloadMessages() {
+      const msgs = JSON.parse(localStorage.getItem("messages") || "[]");
+      if (msgs.length === 0) return alert("پیامی وجود ندارد 🌿");
+      const ws_data = msgs.map(m => ({
+        "نام": m.name,
+        "شماره تماس": m.phone,
+        "پیام": m.message,
+        "تاریخ": m.date
+      }));
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(ws_data);
+      XLSX.utils.book_append_sheet(wb, ws, "Messages");
+      XLSX.writeFile(wb, "ERiSH_Messages.xlsx");
+    }
+
+    // 🔔 اعلان سفارش جدید
+    window.addEventListener("storage", function(event) {
+      if (event.key === "orders") {
+        const orders = JSON.parse(event.newValue || "[]");
+        const lastSeen = localStorage.getItem("lastSeenOrders") || 0;
+        if (orders.length > lastSeen) {
+          const newOrder = orders[orders.length - 1];
+          const msg = `🆕 سفارش جدید از ${newOrder.name} – ${newOrder.product} (${newOrder.size} متر)`;
+          showPopup(msg);
+          localStorage.setItem("lastSeenOrders", orders.length);
+          loadOrders();
+        }
+      }
+    });
+
+    function showPopup(message) {
+      document.getElementById("popupText").innerText = message;
+      document.getElementById("popupNotif").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("popupNotif").style.display = "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>آمار بازدید | ERiSH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">📊 آمار | ERiSH Carpet</div>
+    <nav>
+      <a href="index.html">خانه</a>
+      <a href="products.html">محصولات</a>
+      <a href="offers.html">تخفیف‌ها</a>
+      <a href="stats.html">آمار</a>
+      <a href="dashboard.html">مدیریت</a>
+      <a href="contact.html">تماس</a>
+    </nav>
+  </header>
+
+  <section class="fade-in" style="text-align:center; padding:40px;">
+    <h2>📈 آمار بازدید سایت</h2>
+    <p>در این بخش تعداد بازدید سایت و محبوب‌ترین محصولات را مشاهده می‌کنید.</p>
+
+    <div class="stat-box" style="font-size:18px; margin-top:20px;">
+      بازدید کل سایت: <span id="totalViews" style="color:#0b6b35; font-weight:bold;">0</span> بار
+    </div>
+
+    <canvas id="chart" style="max-width:800px; margin:50px auto;"></canvas>
+  </section>
+
+  <footer>
+    © 2025 ERiSH Carpet — بخش آمار 🌿
+  </footer>
+
+  <script>
+    const total = localStorage.getItem("siteViews") || 0;
+    document.getElementById("totalViews").innerText = total;
+
+    const views = JSON.parse(localStorage.getItem("productViews") || "{}");
+    const ctx = document.getElementById("chart").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: Object.keys(views),
+        datasets: [{
+          label: "تعداد بازدید",
+          data: Object.values(views),
+          backgroundColor: "#0b6b35a8",
+          borderColor: "#0b6b35",
+          borderWidth: 2,
+          borderRadius: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true } }
+      }
+    });
+  </script>
+</body>
+</html>

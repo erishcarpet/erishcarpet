@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>گزارش فروش ماهانه | ERiSH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo">📈 گزارش فروش | ERiSH Carpet</div>
+    <nav>
+      <a href="dashboard.html">بازگشت به مدیریت</a>
+      <a href="index.html">صفحه اصلی</a>
+    </nav>
+  </header>
+
+  <section class="sales fade-in">
+    <h2>گزارش فروش ماهانه</h2>
+    <canvas id="salesChart" style="max-width:900px; margin:auto;"></canvas>
+
+    <div class="report-box">
+      <button class="btn" onclick="exportExcel()">📥 دانلود گزارش Excel</button>
+      <button class="btn" onclick="exportPDF()">📄 دانلود گزارش PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 ERiSH Carpet — گزارش فروش 🌿
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    const PRICE_PER_METER = 600000;
+
+    // محاسبه فروش ماهانه
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+    const monthlySales = {};
+
+    orders.forEach(o => {
+      const date = new Date(o.date);
+      const month = date.toLocaleString("fa-IR", { month: "long" });
+      const total = (parseFloat(o.size) || 0) * PRICE_PER_METER;
+      monthlySales[month] = (monthlySales[month] || 0) + total;
+    });
+
+    const labels = Object.keys(monthlySales);
+    const data = Object.values(monthlySales);
+
+    // 📊 نمودار فروش
+    const ctx = document.getElementById("salesChart").getContext("2d");
+    new Chart(ctx, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [{
+          label: "میزان فروش (تومان)",
+          data,
+          borderColor: "#0b6b35",
+          backgroundColor: "#a3e4c0",
+          borderWidth: 3,
+          tension: 0.3,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+
+    // 📥 خروجی اکسل
+    function exportExcel() {
+      const rows = labels.map((month, i) => ({
+        "ماه": month,
+        "فروش (تومان)": data[i].toLocaleString("fa-IR")
+      }));
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.json_to_sheet(rows);
+      XLSX.utils.book_append_sheet(wb, ws, "Sales");
+      XLSX.writeFile(wb, "ERiSH_Sales_Report.xlsx");
+    }
+
+    // 📄 خروجی PDF
+    async function exportPDF() {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(16);
+      pdf.text("گزارش فروش ماهانه ERiSH Carpet", 30, 20);
+      pdf.setFontSize(12);
+      let y = 40;
+
+      labels.forEach((month, i) => {
+        pdf.text(`${month}: ${data[i].toLocaleString("fa-IR")} تومان`, 30, y);
+        y += 10;
+      });
+
+      pdf.save("ERiSH_Sales_Report.pdf");
+    }
+  </script>
+</body>
+</html>

@@ -1,78 +1,106 @@
 <!DOCTYPE html>
 <html lang="fa">
-  <head>
-    <meta charset="utf-8">
-    <title>سفارش آنلاین | فرشینه ERiSH</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="index.html" class="logo">فرشینه ERiSH 🌿</a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <ul class="nav-links">
-          <li><a href="index.html">خانه</a></li>
-          <li><a href="products.html">محصولات</a></li>
-          <li><a href="gallery.html">گالری</a></li>
-          <li><a href="order.html">سفارش آنلاین</a></li>
-          <li><a href="about.html">درباره ما</a></li>
-          <li><a href="contact.html">تماس با ما</a></li>
-        </ul>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ثبت سفارش | ERiSH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">🧵 ERiSH Carpet</div>
+    <nav>
+      <a href="index.html">خانه</a>
+      <a href="products.html">محصولات</a>
+      <a href="offers.html">تخفیف‌ها</a>
+      <a href="stats.html">آمار</a>
+      <a href="dashboard.html">مدیریت</a>
+      <a href="contact.html">تماس</a>
     </nav>
+  </header>
 
-    <header>
-      <h1>سفارش آنلاین فرشینه ERiSH 🌿</h1>
-      <p>فرم زیر را پر کنید تا پیام سفارش شما در واتساپ باز شود 💬</p>
-    </header>
+  <div class="form-box fade-in">
+    <h2>فرم ثبت سفارش</h2>
+    <form id="orderForm">
+      <label>نام و نام خانوادگی:</label>
+      <input type="text" id="name" required>
 
-    <main class="order-container">
-      <form id="orderForm" onsubmit="sendToWhatsApp(event)">
-        <label>نام و نام خانوادگی:</label>
-        <input type="text" id="order_name" required placeholder="نام خود را وارد کنید">
+      <label>شماره تماس:</label>
+      <input type="text" id="phone" required>
 
-        <label>شماره تماس:</label>
-        <input type="tel" id="order_phone" required placeholder="مثلاً 09123456789">
+      <label>آدرس:</label>
+      <textarea id="address" rows="3" required></textarea>
 
-        <label>انتخاب طرح فرشینه:</label>
-        <select id="product" required>
-          <option value="">-- انتخاب طرح --</option>
-          <option value="مدرن">فرشینه طرح مدرن</option>
-          <option value="گل رز">فرشینه طرح گل رز</option>
-          <option value="وینتج">فرشینه طرح وینتج</option>
-          <option value="کودکانه">فرشینه طرح کودکانه</option>
-        </select>
+      <label>طرح انتخابی:</label>
+      <input type="text" id="product" placeholder="مثلاً فرشینه مدرن 1" required>
 
-        <label>سایز دلخواه:</label>
-        <input type="text" id="size" placeholder="مثلاً 2×1.5 متر">
+      <label>اندازه (متر مربع):</label>
+      <input type="number" id="size" placeholder="مثلاً 4" required>
 
-        <label>توضیحات یا آدرس دقیق:</label>
-        <textarea id="details" rows="4" placeholder="آدرس یا توضیحات اضافه..."></textarea>
+      <div class="price-box">قیمت کل: <span id="price">0</span> تومان</div>
 
-        <button type="submit">ارسال سفارش در واتساپ 💬</button>
-      </form>
-    </main>
+      <label>توضیحات اضافی:</label>
+      <textarea id="notes" rows="2"></textarea>
 
-    <footer>
-      <p>© 2025 فرشینه ERiSH - همه حقوق محفوظ است 💚</p>
-      <a href="index.html">بازگشت به صفحه اصلی</a>
-    </footer>
+      <button type="submit" class="btn">ثبت سفارش ✅</button>
+      <div class="success" id="successMsg">سفارش شما با موفقیت ثبت شد 🌿</div>
+    </form>
+  </div>
 
-    <script>
-      function sendToWhatsApp(event) {
-        event.preventDefault();
-        const name = document.getElementById("order_name").value;
-        const phone = document.getElementById("order_phone").value;
-        const product = document.getElementById("product").value;
-        const size = document.getElementById("size").value;
-        const details = document.getElementById("details").value;
+  <footer>
+    © 2025 ERiSH Carpet — تمامی حقوق محفوظ است 🌿
+  </footer>
 
-        const text = `🛍 سفارش جدید:\n👤 نام: ${name}\n📞 شماره: ${phone}\n🎨 طرح: ${product}\n📏 سایز: ${size}\n📍 توضیحات: ${details}`;
-        const url = `https://wa.me/989229289822?text=${encodeURIComponent(text)}`;
-        window.open(url, '_blank');
-      }
-    </script>
-  </body>
+  <script>
+    const PRICE_PER_METER = 600000;
+
+    document.getElementById("size").addEventListener("input", function() {
+      const size = parseFloat(this.value) || 0;
+      document.getElementById("price").innerText = (size * PRICE_PER_METER).toLocaleString("fa-IR");
+    });
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const order = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        product: document.getElementById("product").value,
+        size: parseFloat(document.getElementById("size").value),
+        notes: document.getElementById("notes").value,
+        status: "در حال بررسی",
+        date: new Date().toLocaleString()
+      };
+
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+      orders.push(order);
+      localStorage.setItem("orders", JSON.stringify(orders));
+
+      // 🔔 اعلان برای مدیر
+      localStorage.setItem("orders", JSON.stringify(orders));
+      window.dispatchEvent(new Event("storage"));
+
+      // 🟢 ارسال مستقیم به واتساپ
+      const whatsappNumber = "989229289822"; // شماره شما بدون صفر
+      const msg = `🧵 سفارش جدید ERiSH Carpet
+👤 نام: ${order.name}
+📞 شماره: ${order.phone}
+📍 آدرس: ${order.address}
+🎨 طرح: ${order.product}
+📏 اندازه: ${order.size} متر
+💰 قیمت: ${(order.size * PRICE_PER_METER).toLocaleString("fa-IR")} تومان
+🕒 تاریخ: ${order.date}`;
+
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`);
+
+      // ✅ نمایش پیام موفقیت
+      document.getElementById("successMsg").style.display = "block";
+      document.getElementById("orderForm").reset();
+      document.getElementById("price").innerText = "0";
+
+      setTimeout(() => document.getElementById("successMsg").style.display = "none", 4000);
+    });
+  </script>
+</body>
 </html>

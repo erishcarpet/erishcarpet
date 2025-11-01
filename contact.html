@@ -1,95 +1,95 @@
 <!DOCTYPE html>
 <html lang="fa">
-  <head>
-    <meta charset="utf-8">
-    <title>تماس با ما | فرشینه ERiSH</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-
-  <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="nav-container">
-        <a href="index.html" class="logo">فرشینه ERiSH 🌿</a>
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <ul class="nav-links">
-          <li><a href="index.html">خانه</a></li>
-          <li><a href="products.html">محصولات</a></li>
-          <li><a href="gallery.html">گالری</a></li>
-          <li><a href="order.html">سفارش آنلاین</a></li>
-          <li><a href="about.html">درباره ما</a></li>
-          <li><a href="contact.html">تماس با ما</a></li>
-        </ul>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تماس با ما | ERiSH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">📞 تماس با ما | ERiSH Carpet</div>
+    <nav>
+      <a href="index.html">خانه</a>
+      <a href="products.html">محصولات</a>
+      <a href="offers.html">تخفیف‌ها</a>
+      <a href="stats.html">آمار</a>
+      <a href="dashboard.html">مدیریت</a>
+      <a href="contact.html">تماس</a>
     </nav>
+  </header>
 
-    <header>
-      <h1>تماس با فرشینه ERiSH 🌿</h1>
-      <p>هر سؤال یا سفارشی دارید، با ما در ارتباط باشید 💬</p>
-    </header>
+  <section class="fade-in" style="text-align:center; padding:50px;">
+    <h2>راه‌های ارتباط با ما 🌿</h2>
+    <p>برای سفارش، مشاوره یا همکاری با ما در ارتباط باشید.</p>
 
-    <main class="contact-container">
+    <div style="margin-top:40px; line-height:2;">
+      <p><b>📍 آدرس:</b> ارومیه، خیابان امام، فروشگاه ERiSH Carpet</p>
+      <p><b>📞 تلفن تماس:</b> <a href="tel:+989229289822" style="color:#0b6b35;">0922-928-9822</a></p>
+      <p><b>💬 واتساپ:</b> <a href="https://wa.me/989229289822" target="_blank" style="color:#0b6b35;">پیام در واتساپ</a></p>
+      <p><b>📧 ایمیل:</b> <a href="mailto:info@erishcarpet.ir" style="color:#0b6b35;">info@erishcarpet.ir</a></p>
+      <p><b>🌐 سایت رسمی:</b> <a href="https://erishcarpet.github.io/erishcarpet/" target="_blank" style="color:#0b6b35;">بازدید از وب‌سایت</a></p>
+      <p><b>📅 تاریخ امروز:</b> <span id="todayDate"></span></p>
+    </div>
 
-      <!-- اطلاعات تماس -->
-      <div class="contact-info">
-        <div class="info-box">
-          <h3>📞 شماره تماس</h3>
-          <p>09229289822</p>
-        </div>
-
-        <div class="info-box">
-          <h3>💬 واتساپ</h3>
-          <a href="https://wa.me/989229289822" target="_blank">ارسال پیام در واتساپ</a>
-        </div>
-
-        <div class="info-box">
-          <h3>📸 اینستاگرام</h3>
-          <a href="https://instagram.com/erish-Carpet" target="_blank">erish-Carpet@</a>
-        </div>
-
-        <div class="info-box">
-          <h3>📍 آدرس فروشگاه</h3>
-          <p>ارومیه - خیابان اصلی - فروشگاه فرشینه ERiSH</p>
-        </div>
-      </div>
-
-      <!-- فرم تماس -->
-      <h2 style="color:#0b6b35; text-align:center;">ارسال پیام مستقیم در واتساپ 💚</h2>
-      <form id="contactForm" onsubmit="sendToWhatsApp(event)">
+    <div class="form-box" style="margin-top:40px;">
+      <h3>ارسال پیام برای ما</h3>
+      <form id="contactForm">
         <label>نام شما:</label>
-        <input type="text" id="name" required placeholder="نام خود را وارد کنید">
+        <input type="text" id="name" required>
 
         <label>شماره تماس:</label>
-        <input type="tel" id="phone" required placeholder="مثلاً 09123456789">
+        <input type="text" id="phone" required>
 
         <label>پیام شما:</label>
-        <textarea id="message" rows="4" required placeholder="پیام خود را بنویسید"></textarea>
+        <textarea id="message" rows="4" required></textarea>
 
-        <button type="submit">ارسال در واتساپ 💬</button>
+        <button type="submit" class="btn">📨 ارسال پیام</button>
+        <div id="successMsg" class="success">پیام شما با موفقیت ارسال شد 🌿</div>
       </form>
+    </div>
+  </section>
 
-      <!-- نقشه -->
-      <h2 style="color:#0b6b35; text-align:center; margin-top:40px;">📍 موقعیت فروشگاه روی نقشه</h2>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3191.644578260187!2d44.9850469!3d37.5520486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4017cbf6cbeb4c41:0x90c7db5dc3082d17!2sUrmia!5e0!3m2!1sen!2s!4v1694500000000"
-        allowfullscreen="" loading="lazy"></iframe>
-    </main>
+  <footer>
+    © 2025 ERiSH Carpet — ارتباط با ما 💚
+  </footer>
 
-    <footer>
-      <p>© 2025 فرشینه ERiSH - همه حقوق محفوظ است 💚</p>
-      <a href="index.html">بازگشت به صفحه اصلی</a>
-    </footer>
+  <script src="script.js"></script>
+  <script>
+    // 📅 نمایش تاریخ امروز
+    document.getElementById("todayDate").textContent =
+      new Date().toLocaleDateString("fa-IR");
 
-    <script>
-      function sendToWhatsApp(event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const phone = document.getElementById("phone").value;
-        const message = document.getElementById("message").value;
-        const text = `📩 پیام جدید از سایت فرشینه ERiSH:\n👤 نام: ${name}\n📞 شماره: ${phone}\n💬 پیام:\n${message}`;
-        const url = `https://wa.me/989229289822?text=${encodeURIComponent(text)}`;
-        window.open(url, '_blank');
-      }
-    </script>
-  </body>
+    // 📩 فرم ارسال پیام
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const msg = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        message: document.getElementById("message").value,
+        date: new Date().toLocaleString()
+      };
+
+      const msgs = JSON.parse(localStorage.getItem("messages") || "[]");
+      msgs.push(msg);
+      localStorage.setItem("messages", JSON.stringify(msgs));
+
+      // 🟢 ارسال مستقیم پیام به واتساپ
+      const whatsapp = "989229289822"; // شماره شما بدون صفر
+      const message = `📩 پیام جدید از سایت ERiSH Carpet
+👤 نام: ${msg.name}
+📞 شماره: ${msg.phone}
+💬 پیام: ${msg.message}
+🕒 زمان: ${msg.date}`;
+
+      window.open(`https://wa.me/${whatsapp}?text=${encodeURIComponent(message)}`);
+
+      // ✅ نمایش پیام موفقیت
+      document.getElementById("contactForm").reset();
+      document.getElementById("successMsg").style.display = "block";
+      setTimeout(() => (document.getElementById("successMsg").style.display = "none"), 4000);
+    });
+  </script>
+</body>
 </html>
