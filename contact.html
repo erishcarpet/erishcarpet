@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تماس با ما | ERISH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: "Vazirmatn", sans-serif;
+      background-color: #f8f8f8;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1aa163;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #1aa163;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    form {
+      background: #f4fff8;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #d6f3df;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #1aa163;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: none;
+      height: 100px;
+    }
+
+    button {
+      background-color: #1aa163;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #14894f;
+    }
+
+    .contact-info {
+      background: #f4fff8;
+      border: 1px solid #d6f3df;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .contact-info h3 {
+      color: #1aa163;
+      margin-bottom: 10px;
+    }
+
+    .contact-info p {
+      margin: 5px 0;
+      line-height: 1.8;
+    }
+
+    .contact-info a {
+      color: #1aa163;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    iframe {
+      width: 100%;
+      height: 250px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 15px;
+    }
+
+    footer {
+      background-color: #1aa163;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+<header class="main-header">
+  <div class="logo" onclick="location.href='index.html'">ERISH Carpet</div>
+  <nav>
+    <a href="index.html">خانه</a>
+    <a href="products.html">محصولات</a>
+    <a href="order.html">ثبت سفارش</a>
+    <a href="cart.html">سبد خرید</a>
+    <a href="myorders.html">سفارش‌های من</a>
+    <a href="login.html">ورود مشتری</a>
+    <a href="about.html">درباره ما</a>
+    <a href="contact.html">تماس با ما</a>
+    <a href="adminlogin.html">مدیریت</a>
+  </nav>
+</header>
+  <header>📞 تماس با ما</header>
+
+  <main>
+    <h2>با ERISH Carpet در ارتباط باشید</h2>
+
+    <div class="contact-container">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">نام شما</label>
+          <input type="text" id="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">ایمیل (اختیاری)</label>
+          <input type="email" id="email">
+        </div>
+
+        <div class="form-group">
+          <label for="message">پیام شما</label>
+          <textarea id="message" required></textarea>
+        </div>
+
+        <button type="submit">ارسال پیام</button>
+      </form>
+
+      <div class="contact-info">
+        <h3>اطلاعات تماس</h3>
+        <p>📍 آدرس: ارومیه، خیابان نازلو</p>
+        <p>📞 تلفن: <a href="tel:+989229289822">0922 928 9822</a></p>
+        <p>💬 واتساپ: <a href="https://wa.me/989229289822">ارتباط مستقیم</a></p>
+        <p>📸 اینستاگرام: <a href="https://instagram.com/">@ERISHCarpet</a></p>
+
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8123.022!2d45.038!3d37.552!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2zMzfCsDMzJzA3LjMiTiA0NcKwMDInMTcuMCJF!5e0!3m2!1sfa!2s!4v1700000000000"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </main>
+
+  <footer>© ERISH Carpet 2025 - تمامی حقوق محفوظ است</footer>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message= document.getElementById('message').value.trim();
+
+      if (!name || !message) {
+        alert('لطفاً نام و پیام خود را وارد کنید.');
+        return;
+      }
+
+      const phoneNumber = "989229289822"; // شماره واتساپ شما
+      const text = `👤 نام: ${name}%0A📧 ایمیل: ${email || "-"}%0A💬 پیام: ${message}`;
+      window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
+    });
+<script src="script.js"></script>
+</body>
+</html>

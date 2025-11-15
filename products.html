@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>محصولات | ERISH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- header copy -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo" onclick="location.href='index.html'">ERISH Carpet</div>
+      <div class="search-area">
+        <input id="searchInput" placeholder="جستجو...">
+        <button onclick="doSearch()">🔍</button>
+      </div>
+      <div class="header-actions">
+        <a href="cart.html" class="cart-btn">🛒 <span id="cartCount">0</span></a>
+        <a href="login.html" class="login-btn">ورود</a>
+        <button class="menu-toggle" onclick="toggleNav()">☰</button>
+      </div>
+    </div>
+    <nav id="mainNav" class="main-nav">
+      <a href="index.html">خانه</a>
+      <a href="modern.html">مدرن</a>
+      <a href="products.html">همه محصولات</a>
+      <a href="offers.html">تخفیف‌ها</a>
+      <a href="about.html">درباره ما</a>
+    </nav>
+  </header>
+
+  <main class="container" style="padding:22px 16px;">
+    <h2>محصولات</h2>
+    <div id="productsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:16px"></div>
+  </main>
+
+  <footer class="site-footer"><div class="container"><p>© 2025 ERISH Carpet</p></div></footer>
+  <script src="script.js"></script>
+  <script>
+    // sample product data (در صورت تمایل این آرایه را گسترش بده)
+    const PRODUCTS = [
+      {id:'m1',category:'modern',name:'فرشینه مدرن خاکستری',price:600000,img:'images/modern1.jpg'},
+      {id:'m2',category:'modern',name:'فرشینه مدرن طلایی',price:600000,img:'images/modern2.jpg'},
+      {id:'c1',category:'classic',name:'فرشینه کلاسیک کرم',price:600000,img:'images/classic1.jpg'},
+      {id:'f1',category:'fantasy',name:'فرشینه فانتزی رنگارنگ',price:600000,img:'images/fantasy1.jpg'}
+    ];
+
+    function renderProducts(list){
+      const grid = document.getElementById('productsGrid');
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const div = document.createElement('div');
+        div.className='cat-card';
+        div.innerHTML = `<img src="${p.img}" alt=""><h3>${p.name}</h3><p class="small">قیمت هر متر: ${p.price.toLocaleString()} تومان</p>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
+            <button onclick="addToCart('${p.name}',${p.price})" class="btn">افزودن به سبد</button>
+            <a href="modern.html" class="btn" style="background:#0e8f5a">جزئیات</a>
+          </div>`;
+        grid.appendChild(div);
+      });
+    }
+
+    // apply search filter if any
+    const q = getSearchQuery();
+    if(q){
+      const filtered = PRODUCTS.filter(p=> p.name.includes(q) || p.category.includes(q));
+      renderProducts(filtered);
+      // clear search query to prevent repeat
+      localStorage.removeItem('searchQuery');
+    } else renderProducts(PRODUCTS);
+
+    // update cart count
+    updateCartCount();
+  <script src="script.js"></script>
+</body>
+</html>

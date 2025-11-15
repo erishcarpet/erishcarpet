@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>سبد خرید — ERISH Carpet</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo" onclick="location.href='index.html'">ERISH Carpet</div>
+    <div class="search-area"><input id="searchInput" placeholder="جستجو..."><button onclick="doSearch()">🔍</button></div>
+    <div class="header-actions"><a href="cart.html" class="cart-btn">🛒 <span id="cartCount">0</span></a><button class="menu-toggle" onclick="toggleNav()">☰</button></div>
+  </div>
+  <nav id="mainNav" class="main-nav"><a href="index.html">خانه</a><a href="products.html">محصولات</a></nav>
+</header>
+
+<main class="container" style="padding:26px 16px;">
+  <h2>🛒 سبد خرید شما</h2>
+  <div id="cartArea" style="background:#fff;padding:14px;border-radius:12px;box-shadow:var(--card-shadow)"></div>
+  <div style="margin-top:12px;display:flex;gap:12px;justify-content:flex-end">
+    <button onclick="clearCart()" style="padding:10px 14px;border-radius:8px;border:none;background:#ccc">پاک کردن</button>
+    <button onclick="proceedOrder()" style="padding:10px 14px;border-radius:8px;border:none;background:var(--green);color:#fff">تسویه و ثبت سفارش</button>
+  </div>
+</main>
+
+<footer class="site-footer"><div class="container"><p>© 2025 ERISH Carpet</p></div></footer>
+
+<script src="script.js"></script>
+<script>
+  function renderCart(){
+    const cart = getCart();
+    const area = document.getElementById('cartArea');
+    if(cart.length===0){ area.innerHTML='<p class="small">سبد خرید شما خالی است.</p>'; return;}
+    let html = '<ul style="list-style:none;padding-right:0">';
+    let total=0;
+    cart.forEach((it,idx)=>{ total+=Number(it.price||0); html+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #eee"><div><strong>${it.name}</strong><div class="small">${it.meta||''}</div></div><div>${Number(it.price).toLocaleString()} تومان <button onclick="removeItem(${idx})" style="margin-right:10px;background:#ff5b5b;color:#fff;border:none;padding:6px;border-radius:6px">حذف</button></div></li>`});
+    html += `</ul><div style="text-align:left;margin-top:10px"><strong>جمع کل: ${total.toLocaleString()} تومان</strong></div>`;
+    area.innerHTML = html;
+  }
+
+  function removeItem(i){ const c=getCart(); c.splice(i,1); saveCart(c); renderCart(); updateCartCount(); }
+  function clearCart(){ if(confirm('آیا سبد خالی شود؟')){ localStorage.removeItem('cart'); renderCart(); updateCartCount(); } }
+  function proceedOrder(){ const c=getCart(); if(c.length===0){ alert('سبد خالی است'); return;} window.location.href='order.html'; }
+
+  renderCart(); updateCartCount();
+<script src="script.js"></script>
+</body>
+</html>

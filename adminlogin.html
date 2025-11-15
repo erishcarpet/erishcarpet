@@ -1,0 +1,11 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ورود مدیریت</title><link rel="stylesheet" href="styles.css"></head><body>
+<div style="max-width:420px;margin:90px auto;background:#fff;padding:18px;border-radius:12px;box-shadow:var(--card-shadow);text-align:center">
+  <h2 style="color:var(--green)">ورود مدیر</h2>
+  <input id="pass" type="password" placeholder="رمز عبور" style="width:86%;padding:10px;border-radius:8px;border:1px solid #ccc">
+  <br><button style="margin-top:12px;background:var(--green);color:#fff;padding:10px 14px;border-radius:8px;border:none" onclick="login()">ورود</button>
+</div>
+<script>
+function login(){ const p=document.getElementById('pass').value; if(p==='erish2025'){ localStorage.setItem('adminLogged','true'); alert('ورود موفق'); location.href='admin.html'; } else alert('رمز اشتباه');}
+if(localStorage.getItem('adminLogged')==='true') location.href='admin.html';
+<script src="script.js"></script>
+</body></html>

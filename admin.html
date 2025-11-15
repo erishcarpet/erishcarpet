@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>پنل مدیریت</title><link rel="stylesheet" href="styles.css"></head><body>
+<header class="site-header"><div class="header-inner"><div style="color:#fff;font-weight:bold">پنل مدیریت — ERISH Carpet</div><div><button onclick="logout()" style="background:#ff5b5b;color:#fff;padding:8px;border-radius:8px;border:none">خروج</button></div></div></header>
+
+<main class="container" style="padding:20px">
+  <div style="background:#fff;padding:14px;border-radius:12px;box-shadow:var(--card-shadow)">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <label class="small">فیلتر:</label>
+      <select id="filt" onchange="render()"><option value="all">همه</option><option>ثبت جدید</option><option>در حال آماده‌سازی</option><option>ارسال شده</option><option>تحویل شده</option><option>لغو شده</option></select>
+      <button onclick="render()">بروزرسانی</button>
+    </div>
+
+    <div id="area" style="margin-top:12px"></div>
+  </div>
+</main>
+
+<script src="script.js"></script>
+<script>
+if(localStorage.getItem('adminLogged')!=='true'){ alert('لطفاً وارد شوید'); location.href='adminlogin.html' }
+
+function render(){
+  const area=document.getElementById('area'); const filt=document.getElementById('filt').value;
+  const orders = getOrders().reverse();
+  const list = filt==='all'?orders:orders.filter(o=>o.status===filt);
+  if(list.length===0){ area.innerHTML='<p class="small">سفارشی موجود نیست.</p>'; return; }
+  let html='<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#e8fff1"><th>ردیف</th><th>نام</th><th>شماره</th><th>تاریخ</th><th>جمع</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody>';
+  list.forEach((o,idx)=>{ const total=(o.cart||[]).reduce((s,i)=>s+Number(i.price||0),0); html+=`<tr><td>${idx+1}</td><td>${o.name}</td><td>${o.phone}</td><td>${o.date||''}</td><td>${total.toLocaleString()}</td><td><select onchange="change('${o.id}',this.value)"><option ${o.status==='ثبت جدید'?'selected':''}>ثبت جدید</option><option ${o.status==='در حال آماده‌سازی'?'selected':''}>در حال آماده‌سازی</option><option ${o.status==='ارسال شده'?'selected':''}>ارسال شده</option><option ${o.status==='تحویل شده'?'selected':''}>تحویل شده</option><option ${o.status==='لغو شده'?'selected':''}>لغو شده</option></select></td><td><button onclick="detail('${o.id}')" style="margin-right:8px">جزئیات</button><button onclick="remove('${o.id}')" style="background:#ff5b5b;color:#fff">حذف</button></td></tr>` });
+  html += '</tbody></table><div id="detailBox" style="margin-top:12px"></div>';
+  area.innerHTML = html;
+}
+
+function change(id,val){ const ords=getOrders(); const i=ords.findIndex(x=>x.id===id); if(i===-1) return alert('یافت نشد'); ords[i].status=val; saveOrders(ords); alert('وضعیت ذخیره شد'); render(); }
+function detail(id){ const ords=getOrders(); const o=ords.find(x=>x.id===id); if(!o) return; const tot=(o.cart||[]).reduce((s,i)=>s+Number(i.price||0),0); const box=document.getElementById('detailBox'); let html=`<div style="background:#fbfffb;padding:12px;border-radius:8px"><h3>جزئیات</h3><p><strong>نام:</strong>${o.name}</p><p><strong>شماره:</strong>${o.phone}</p><p><strong>آدرس:</strong>${o.city} - ${o.address}</p><p><strong>محصولات:</strong></p><ul>`; html += (o.cart||[]).map(i=>`<li>${i.name} — ${Number(i.price).toLocaleString()} تومان</li>`).join(''); html += `</ul><p><strong>جمع کل:</strong>${tot.toLocaleString()}</p></div>`; box.innerHTML=html; box.scrollIntoView({behavior:'smooth'}); }
+function remove(id){ if(!confirm('آیا مطمئنید حذف شود؟')) return; let ords=getOrders(); ords=ords.filter(x=>x.id!==id); saveOrders(ords); alert('حذف شد'); render(); }
+
+render();
+function logout(){ if(confirm('خروج از پنل؟')){ localStorage.removeItem('adminLogged'); location.href='adminlogin.html' } }
+<script src="script.js"></script>
+</body></html>

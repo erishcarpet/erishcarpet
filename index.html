@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERISH Carpet — فرشینه لوکس</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo" onclick="location.href='index.html'">
+        <img src="images/logo.png" alt="ERISH Carpet" class="logo-img">
+        <span>ERISH Carpet</span>
+      </div>
+
+      <div class="search-area">
+        <input id="searchInput" placeholder="جستجو در محصولات، طرح یا کد..." />
+        <button onclick="doSearch()">🔍</button>
+      </div>
+
+      <div class="header-actions">
+        <a href="cart.html" class="cart-btn">🛒 <span id="cartCount">0</span></a>
+        <a href="login.html" class="login-btn">ورود</a>
+        <button class="menu-toggle" onclick="toggleNav()">☰</button>
+      </div>
+    </div>
+
+    <nav id="mainNav" class="main-nav">
+      <a href="index.html">خانه</a>
+      <a href="products.html">محصولات</a>
+      <a href="offers.html">تخفیف‌ها</a>
+      <a href="about.html">درباره ما</a>
+      <a href="faq.html">سؤالات</a>
+      <a href="contact.html">تماس با ما</a>
+      <a href="adminlogin.html">مدیریت</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>فرشینه‌های لوکس و باکیفیت — ERISH Carpet</h1>
+      <p>مخمل شنل، ارسال امن، قیمت رقابتی — مناسب خانه و نوعروس</p>
+      <a class="cta-btn" href="products.html">مشاهده محصولات</a>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="cats">
+    <div class="container-grid">
+      <article class="cat-card">
+        <img src="images/modern1.jpg" alt="">
+        <h3>مدرن</h3>
+        <p>طرح‌های مینیمال و شیک</p>
+        <a href="modern.html" class="btn">مشاهده</a>
+      </article>
+
+      <article class="cat-card">
+        <img src="images/classic1.jpg" alt="">
+        <h3>کلاسیک</h3>
+        <p>طرح‌های اصیل ایرانی</p>
+        <a href="products.html" class="btn">مشاهده</a>
+      </article>
+
+      <article class="cat-card">
+        <img src="images/fantasy1.jpg" alt="">
+        <h3>فانتزی</h3>
+        <p>رنگ و انرژی برای فضاهای جوان</p>
+        <a href="products.html" class="btn">مشاهده</a>
+      </article>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 ERISH Carpet — تمامی حقوق محفوظ است</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

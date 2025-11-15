@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ثبت سفارش — ERISH Carpet</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo" onclick="location.href='index.html'">ERISH Carpet</div>
+    <div class="search-area"><input id="searchInput" placeholder="جستجو..."><button onclick="doSearch()">🔍</button></div>
+    <div class="header-actions"><a href="cart.html" class="cart-btn">🛒 <span id="cartCount">0</span></a><button class="menu-toggle" onclick="toggleNav()">☰</button></div>
+  </div>
+  <nav id="mainNav" class="main-nav"><a href="index.html">خانه</a><a href="products.html">محصولات</a></nav>
+</header>
+
+<main class="container" style="padding:26px 16px;">
+  <div class="order-container" style="max-width:800px;margin:0 auto;background:#fff;padding:18px;border-radius:12px;box-shadow:var(--card-shadow)">
+    <h2>ثبت نهایی سفارش</h2>
+    <div id="summary" class="summary-box">در حال بارگذاری سبد خرید...</div>
+
+    <form id="orderForm" style="margin-top:12px">
+      <label>نام و نام خانوادگی</label><input id="name" required>
+      <label>شماره تماس</label><input id="phone" required placeholder="0912...">
+      <label>شهر</label><input id="city" required>
+      <label>آدرس دقیق</label><textarea id="address" required></textarea>
+      <div style="display:flex;gap:12px;justify-content:flex-end">
+        <button type="button" onclick="placeOrder()" style="background:var(--green);color:#fff;padding:10px 16px;border-radius:8px;border:none">ثبت سفارش</button>
+        <a id="waLink" style="display:none;padding:10px 12px;background:#25D366;color:#fff;border-radius:8px;text-decoration:none">ارسال در واتساپ</a>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer class="site-footer"><div class="container"><p>© 2025 ERISH Carpet</p></div></footer>
+
+<script src="script.js"></script>
+<script>
+  function showSummary(){
+    const cart = getCart(); const el = document.getElementById('summary');
+    if(cart.length===0){ el.innerHTML='<p class="small">سبد خرید خالی است.</p>'; return; }
+    let html='<ul style="list-style:none;padding-right:0">';
+    let total=0; cart.forEach(it=>{ total+=Number(it.price||0); html+=`<li style="padding:6px 0">${it.name} — ${Number(it.price).toLocaleString()} تومان</li>`});
+    html += `</ul><div style="text-align:left"><strong>جمع کل: ${total.toLocaleString()} تومان</strong></div>`;
+    el.innerHTML = html;
+  }
+
+  function placeOrder(){
+    const name=document.getElementById('name').value.trim();
+    const phone=document.getElementById('phone').value.trim();
+    const city=document.getElementById('city').value.trim();
+    const address=document.getElementById('address').value.trim();
+    const cart = getCart();
+    if(!name||!phone||!city||!address){ alert('لطفاً همه فیلدها را پر کنید'); return; }
+    if(cart.length===0){ alert('سبد خرید خالی است'); return; }
+
+    const order = { id: generateId(), name, phone, city, address, cart, date: new Date().toLocaleString('fa-IR'), status:'ثبت جدید' };
+    const orders = getOrders(); orders.push(order); saveOrders(orders);
+
+    // prepare whatsapp link
+    let txt = `سفارش جدید\nنام: ${name}\nشماره: ${phone}\nشهر: ${city}\nآدرس: ${address}\n\nمحصولات:\n`;
+    cart.forEach(i=> txt += `• ${i.name} — ${Number(i.price).toLocaleString()} تومان\n`);
+    const wa = `https://wa.me/989229289822?text=${encodeURIComponent(txt)}`;
+    const waLink = document.getElementById('waLink');
+    waLink.href = wa; waLink.style.display='inline-block';
+
+    // clear cart
+    localStorage.removeItem('cart'); updateCartCount(); showSummary();
+    alert('✅ سفارش ثبت شد. در صورت تمایل پیام را از طریق دکمه واتساپ ارسال کنید.');
+  }
+
+  showSummary(); updateCartCount();
+<script src="script.js"></script>
+</body>
+</html>

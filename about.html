@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>درباره ما | ERISH Carpet</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: "Vazirmatn", sans-serif;
+      background-color: #f8f8f8;
+      color: #222;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1aa163;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .brand-logo {
+      display: block;
+      margin: 0 auto 20px;
+      width: 120px;
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #1aa163;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    p {
+      line-height: 1.9;
+      font-size: 16px;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .feature {
+      background: #f0fff5;
+      border: 1px solid #d9f5e3;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+
+    .feature h3 {
+      color: #1aa163;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      background-color: #1aa163;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      margin-top: 40px;
+    }
+
+    .contact-short {
+      text-align: center;
+      margin-top: 30px;
+      background: #f3fff8;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid #d0f0dc;
+    }
+
+    .contact-short a {
+      color: #1aa163;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<header class="main-header">
+  <div class="logo" onclick="location.href='index.html'">
+    <img src="images/logo.png" alt="ERISH Carpet" class="logo-img">
+    <span>ERISH Carpet</span>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="جستجوی محصولات...">
+    <button onclick="searchProduct()">🔍</button>
+  </div>
+
+  <nav class="nav-links">
+    <a href="index.html">خانه</a>
+    <a href="products.html">محصولات</a>
+    <a href="order.html">سفارش</a>
+    <a href="cart.html">🛒 سبد</a>
+    <a href="myorders.html">سفارش‌های من</a>
+    <a href="login.html">ورود</a>
+    <a href="about.html">درباره ما</a>
+    <a href="contact.html">تماس با ما</a>
+    <a href="adminlogin.html">مدیریت</a>
+  </nav>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+</header>
+  <main>
+    <img src="logo.png" alt="لوگوی ERISH Carpet" class="brand-logo" onerror="this.style.display='none'">
+
+    <h2>برند ERISH Carpet</h2>
+
+    <p>
+      برند <strong>ERISH Carpet</strong> با هدف تولید فرشینه‌های مدرن، باکیفیت و هماهنگ با سبک دکوراسیون روز دنیا تأسیس شد.
+      ما با استفاده از جدیدترین دستگاه‌های چاپ و پارچه‌های باکیفیت مخمل شنل ۹۵۰ گرم و نمد ۱۰۰۰ گرم،
+      محصولاتی تولید می‌کنیم که علاوه بر زیبایی، دوام بالا و لطافت ویژه‌ای دارند.
+    </p>
+
+    <p>
+      تمامی فرشینه‌ها دارای زیره استپ‌دار هستند تا روی کاشی و سرامیک لیز نخورند.
+      رسالت ما، خلق محیطی گرم و دلنشین در خانه‌های ایرانی است 🌿
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <h3>🧵 کیفیت ممتاز</h3>
+        <p>استفاده از بهترین مواد اولیه و چاپ دقیق برای دوام بالا و ظاهر زیبا.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🎨 طراحی اختصاصی</h3>
+        <p>امکان سفارش طرح دلخواه متناسب با سلیقه و فضای منزل شما.</p>
+      </div>
+
+      <div class="feature">
+        <h3>🚚 ارسال سراسری</h3>
+        <p>تحویل به تمام نقاط ایران با بسته‌بندی ایمن و مطمئن.</p>
+      </div>
+
+      <div class="feature">
+        <h3>💬 پشتیبانی واتساپ</h3>
+        <p>پاسخگویی سریع و مشاوره رایگان برای انتخاب بهترین طرح.</p>
+      </div>
+    </div>
+
+    <div class="contact-short">
+      <p>📞 برای ارتباط سریع از طریق <a href="https://wa.me/989229289822">واتساپ</a> یا <a href="https://instagram.com/">اینستاگرام</a> با ما در تماس باشید.</p>
+    </div>
+  </main>
+
+  <footer>© 2025 ERISH Carpet - تمامی حقوق محفوظ است</footer>
+</body>
+</header>
+</html>
