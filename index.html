@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERiSH Carpet — خانه</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body><div id="splash">E R I S H</div> class="material-animate">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" class="logo">ERiSH <span>Carpet</span></a>
+      </div>
+
+      <nav class="main-nav">
+        <a href="index.html">خانه</a>
+        <a href="products.html">محصولات</a>
+        <a href="about.html">درباره ما</a>
+        <a href="contact.html">تماس</a>
+        <a href="cart.html" class="cart-link">سبد (<span id="cart-count">0</span>)</a>
+      </nav>
+
+      <button class="hamburger" aria-label="منو">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero / Parallax -->
+  <section class="scroll-fade" class="hero">
+    <div class="hero-parallax" style="background-image:url('images/banner1.jpg')"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <h1 class="hero-title">فرش‌های مدرن و لاکچری ERiSH</h1>
+      <p class="hero-sub">تلفیق طراحی معاصر و کیفیت استثنایی برای هر خانه</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="products.html">مشاهده محصولات</a>
+        <a class="btn ghost" href="contact.html">سفارش اختصاصی</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features / Highlights -->
+  <section class="scroll-fade" class="features container">
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.7 4.1L20 22l-8-5-8 5 2.7-8.9L1 9h7z"/></svg>
+      <h4>طراحی مدرن</h4>
+      <p>مجموعه‌ای از طرح‌های اختصاصی و بروز</p>
+    </div>
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 6 4 4 6.5 4c1.74 0 3.41 1 4.5 2.09C12.09 5 13.76 4 15.5 4 18 4 20 6 20 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <h4>کیفیت بالا</h4>
+      <p>مواد با دوام و بافت عالی</p>
+    </div>
+    <div class="feature">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0-4h2V7H3v2zm0 8h2v-2H3v2zm4 0h14v-2H7v2zM7 9h14V7H7v2zm0 4h14v-2H7v2z"/></svg>
+      <h4>تحویل سریع</h4>
+      <p>ارسال امن و پیگیری سفارش</p>
+    </div>
+  </section>
+
+  <!-- Products carousel (simple) -->
+  <section class="scroll-fade" class="carousel container">
+    <h2>محصولات پیشنهادی</h2>
+    <div class="carousel-track" id="carousel">
+      <!-- populated by JS -->
+    </div>
+    <div class="carousel-controls">
+      <button id="prev">‹</button>
+      <button id="next">›</button>
+    </div>
+  </section>
+
+  <!-- Gallery / Parallax strips -->
+  <section class="scroll-fade" class="gallery">
+    <div class="strip" style="background-image:url('images/banner2.jpg')"></div>
+    <div class="strip" style="background-image:url('images/banner3.jpg')"></div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>ERiSH Carpet</h3>
+        <p>آدرس: نازلو — تلفن: 09229289822</p>
+      </div>
+      <div class="footer-links">
+        <a href="about.html">درباره ما</a>
+        <a href="contact.html">تماس</a>
+        <a href="products.html">محصولات</a>
+      </div>
+    </div>
+    <div class="copyright">© 2025 ERiSH Carpet — همه حقوق محفوظ است</div>
+  </footer>
+
+  <!-- Floating actions -->
+  <a class="float-btn whatsapp" title="واتساپ" href="https://wa.me/09229289822" target="_blank">واتساپ</a>
+  <a class="float-btn top" title="برگشت به بالا" href="#top">↑</a>
+
+  <script src="js/script.js"></script>
+
+<div class="fab ripple" onclick="toggleDark()">☾</div>
+<script>
+function toggleDark(){
+  document.documentElement.classList.toggle('dark');
+}
+</script>
+
+<div class="lightbox-bg" id="lightboxBg" onclick="this.style.display='none'">
+  <img id="lightboxImg">
+</div>
+
+<script>
+// scroll animation
+const obs=new IntersectionObserver(es=>{
+ es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible');});
+});
+document.querySelectorAll('.scroll-fade').forEach(el=>obs.observe(el));
+
+// lightbox
+document.querySelectorAll('img').forEach(i=>{
+  i.style.cursor='zoom-in';
+  i.onclick=()=>{
+    document.getElementById('lightboxImg').src=i.src;
+    document.getElementById('lightboxBg').style.display='flex';
+  }
+});
+</script>
+</body>
+
+
+</html>

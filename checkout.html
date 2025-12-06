@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ERiSH Carpet — پرداخت</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body><div id="splash">E R I S H</div> class="material-animate">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" class="logo">ERiSH <span>Carpet</span></a>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">خانه</a>
+        <a href="products.html">محصولات</a>
+        <a href="about.html">درباره ما</a>
+        <a href="contact.html">تماس</a>
+        <a href="cart.html" class="cart-link">سبد (<span id="cart-count-5">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container checkout-page">
+    <h2>فرم سفارش و پرداخت</h2>
+    <form id="checkout-form" class="checkout-form">
+      <label>نام و نام خانوادگی
+        <input type="text" name="name" required>
+      </label>
+      <label>شماره تماس
+        <input type="tel" name="phone" required>
+      </label>
+      <label>آدرس
+        <textarea name="address" required></textarea>
+      </label>
+      <label>روش پرداخت
+        <select name="payment">
+          <option value="online">پرداخت آنلاین</option>
+          <option value="cod">پرداخت در محل</option>
+        </select>
+      </label>
+      <div class="checkout-summary" id="checkout-summary"></div>
+      <button type="submit" class="btn primary">تایید و ثبت سفارش</button>
+    </form>
+  </main>
+
+  <a class="float-btn whatsapp" title="واتساپ" href="https://wa.me/09229289822" target="_blank">واتساپ</a>
+  <a class="float-btn top" title="برگشت به بالا" href="#top">↑</a>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>ERiSH Carpet</h3>
+        <p>آدرس: نازلو — تلفن: 09229289822</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+
+<div class="fab ripple" onclick="toggleDark()">☾</div>
+<script>
+function toggleDark(){
+  document.documentElement.classList.toggle('dark');
+}
+</script>
+
+<div class="lightbox-bg" id="lightboxBg" onclick="this.style.display='none'">
+  <img id="lightboxImg">
+</div>
+
+<script>
+// scroll animation
+const obs=new IntersectionObserver(es=>{
+ es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible');});
+});
+document.querySelectorAll('.scroll-fade').forEach(el=>obs.observe(el));
+
+// lightbox
+document.querySelectorAll('img').forEach(i=>{
+  i.style.cursor='zoom-in';
+  i.onclick=()=>{
+    document.getElementById('lightboxImg').src=i.src;
+    document.getElementById('lightboxBg').style.display='flex';
+  }
+});
+</script>
+</body>
+
+
+</html>
